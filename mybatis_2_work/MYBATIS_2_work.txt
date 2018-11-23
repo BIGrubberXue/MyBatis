@@ -1,5 +1,5 @@
 - configuration
-	- properties 
+	- properties   
 	- settings
 	- typeAliases
 	- typeHandlers
@@ -12,30 +12,70 @@
 	- mappers
 ---------------------------------------------------------------------------
 properties
-��ϵͳ����һЩ���в���(���ⲿ�������滻����)��
+给系统配置一些运行参数(可外部化，可替换属性)。
+ <properties>
+ 	<property name="..." value="..."></property>
+ 	<property name="..." value="..." />
+	......
+ </properties>
 ---------------------------------------------------------------------------
 settings
-�������ã�Ӱ��ײ����С������޸�MyBatis������ʱ����Ϊ��ʽ��
+复杂配置，影响底层运行。可以修改MyBatis在运行时的行为方式。
+<settings>
+ 	<setting name="..." value="..."></property>
+ 	<setting name="..." value="..." />
+	......
+ </settings>
 ---------------------------------------------------------------------------
 typeAliases
-����
+别名
+<typeAliases>
+	<typeAliases alias=".别名." type=".名."  />
+	<!--  <package name=".名.">默认小写为别名   用@Alias注释      -->
+</typeAliases>
 ---------------------------------------------------------------------------
 typeHandlers
-����ת����
+类型转换器
+<typeHandlers>
+ 	<typeHandler jdbcType=".." javaType=".." handler="" ></property>
+ 	<typeHandler jdbcType=".." javaType=".." handler=""/>
+	<!--  <package name=".名.">无法指定jdbcType 和 javaType  用@Alias注释      -->
+	......
+ </typeHandlers>
 ---------------------------------------------------------------------------
 objectFactory
-ÿ��MyBatis��������������ʵ��ʱ��������ʹ��ObjectFactoryʵ����ִ�д˲����� Ĭ�ϵ�ObjectFactoryʹ��Ĭ�Ϲ��캯��ʵ����Ŀ���࣬������ڲ���ӳ�䣬��ʹ�ò��������캯����
+每次MyBatis创建结果对象的新实例时，它都会使用ObjectFactory实例来执行此操作。 默认的ObjectFactory使用默认构造函数实例化目标类，如果存在参数映射，则使用参数化构造函数。
+<objectFactory type=".配置的工厂.">
+	<property name="" value="" />
+</tobjectFactory>
 ---------------------------------------------------------------------------
 plugins
-���
+插件
 ---------------------------------------------------------------------------
-environments ���л���
-	transactionManager ���������
-	dataSource ����Դ
+environments 运行环境
+	transactionManager 事务管理器
+	dataSource 数据源
+<environments>
+	<transactionManager type=".事务工厂." />
+	<dataSource type="UNPOOLED||POOLED||JNDI">
+</environments>
 ---------------------------------------------------------------------------
 databaseIdProvider 
-���ݿ⳧�̱�ʶ
+数据库厂商标识
+<databaseIdProvider type="DB_VENDOR">
+ 	<property name=".1." value="..." ></property>
+ 	<property name=".2." value="..." />
+	<!-- 对应的映射器中
+		databaseId="1||2"
+	-->
+ </databaseIdProvider >
 ---------------------------------------------------------------------------
 mappers 
-ӳ��ӳ����
+映入映射器
+<mappers>
+ 	<mapper resource=".."/><!-- 文件路径注册 -->
+	<package name=".."><!-- 用包名注册 -->
+	<mapper class=".."><!-- 类名注册 -->
+	<mapper url=".."><!-- 用userMapper.xml注册 -->
+ </mappers>
 ---------------------------------------------------------------------------
