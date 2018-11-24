@@ -1,0 +1,76 @@
+映射器
+================================================
+- select ：查询语句
+- insert ：插入语句
+- update ：更新语句
+- delete ：删除语句
+- sql：允许定义一部分sql，然后在各个地方引用它  
+- parameterMap：定义参数映射类（即将被删除）
+- resultMap：用来描述从数据库结果集中来加载对象，它是最复杂、最强大的元素
+//- cache：给定命名空间的缓存配置
+//- cache-ref ：其他命名空间缓存配置的引用
+=================================================
+--------------------------------select--------------------------------
+<select id="selectPerson" parameterType="int" resultType="hashmap">  	SELECT * FROM PERSON WHERE ID = #{id} 
+</select>
+
+--------------------------------insert--------------------------------
+<insert id="insertAuthor"> 
+insert into Author (id,username,password,email,bio) 
+	values (#{id},#{username},#{password},#{email},#{bio})
+</insert>
+
+--------------------------------update--------------------------------
+<update id="updateAuthor">
+update Author set    username = #{username},  password = #{password},    email = #{email},    bio = #{bio}  where id = #{id}
+</update>
+
+--------------------------------delete--------------------------------
+<delete id="deleteAuthor"> 
+	delete from Author where id = #{id}
+</delete>
+----------------------------------------------------------------------
+--------------------------参数处理-----------------------------------
+
+传递多个参数（<5）：#{parm1}  #{parm2}.........
+	       命名参数：明确指定封装是map的Key 
+		        public 方法(int id,string name)=>public 方法(@param("id")int id,@param("name")string name)--可以使用-->#{id}#{name}
+----------------------------------------------------------------------
+传递多个参数（>5）：#{parm1}  #{parm2}.........
+    返回List：
+        接口定义为：public List<Role> findRolesByBean(RoleParams roleParam);
+    记录封装map：public Map<属性,属性,......>  方法();
+	            -返回一条记录map-----resultType="map"（MyBatis起的别名）
+                            -多条记录封装在一个map-----resultType="集合里元素的名字"
+----------------------------------------------------------------------
+传递单个参数：${}：是以预编译的形式，将参数设置到sql语句中，paeparedStatement：防止sql注入。
+	       #{}：取出的值直接瓶装在sql语句中，有安全问题。
+=============================================
+sql ：
+该元素可用于定义可以包含在其他语句中的可重用SQL代码片段。它可以静态地（在加载阶段期间）参数化。 不同的属性值可以在包含实例中变化。
+<sql id="userColumns">
+	${alias}.id,${alias}.username,${alias}.password
+</sql>
+
+SQL片段也可以包含在另一个语句中
+<select id="selectUsers" resultType="map">
+    select
+        <include refid="userColumns"><property name="alias" value="t1"/>,               <include refid="userColumns"><property name="alias" value="t2"/>         from some_table t1
+        cross join some_table t2
+</select>
+=============================================
+resultMap：
+		-the most important and powerful element in MyBatis.-
+
+<resultMap id="userResultMap" type="User">
+    <id property="id" column="user_id" /><!- 主键 -->
+    <result property="username" column="user_name"/><!- 其他列 -->
+    <result property="password" column="hashed_password"/><!- 其他列  -->
+</resultMap>
+
+
+<select id="selectUsers" resultMap="userResultMap">
+    select user_id,user_name,hashed_password  from some_table  where id=#{id}
+</select>
+
+resultType和resultMap只能填一个
