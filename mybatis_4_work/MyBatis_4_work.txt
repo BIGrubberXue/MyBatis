@@ -1,0 +1,38 @@
+association    (处理一对多级联)  deals with a "has-one" type relationship.
+一对一级联关系，使用association元素代码实现
+-----------------------------------------------------------------------------------
+<resultMap>
+    <.......>
+    <association property="author" javaType="Author">
+        <id property="id" column="author_id"/>
+        <result property="username" column="author_username"/>     </association>
+</resultMap>
+-----------------------------------------------------------------------------------
+property属性代表映射到POJO属性上
+select配置是命名空间+sql id 的形式
+column代表sql的列，用作参数传递（多参数用逗号隔开）
+==================================================
+collection
+一对多级联，其select元素指向sql，将通过column制定的sql字段作为参数传递，然后将结果返回给POJO
+<resultMap>
+    <.......>
+    <collection property="posts" ofType="domain.blog.Post">
+        <id property="id" column="post_id"/>
+        <result property="subject" column="post_subject"/> 
+        <result property="body" column="post_body"/>
+    </collection>
+</resultMap>
+
+==================================================
+discriminator 鉴别器
+它的属性column代表哪个字段进行鉴别。
+==================================================
+延迟加载
+settings配置中存在两个可以设置级联
+
+lazyLoadingEnabled 
+延迟加载的全局开关，默认false，在特定关联关系中，可通过设置fetchType属性来覆盖该项的开关状态
+
+aggressiveLazyLoading
+当启用时，对任意延迟属性的调用会使带有延迟加载属性的对象完整加载；反之，则每种属性按需加载。MyBatis3.4.1前默认true，之后为false
+
