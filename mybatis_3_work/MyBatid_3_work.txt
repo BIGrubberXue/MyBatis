@@ -1,14 +1,14 @@
-Ó³ÉäÆ÷
+æ˜ å°„å™¨
 ================================================
-- select £º²éÑ¯Óï¾ä
-- insert £º²åÈëÓï¾ä
-- update £º¸üĞÂÓï¾ä
-- delete £ºÉ¾³ıÓï¾ä
-- sql£ºÔÊĞí¶¨ÒåÒ»²¿·Ösql£¬È»ºóÔÚ¸÷¸öµØ·½ÒıÓÃËü  
-- parameterMap£º¶¨Òå²ÎÊıÓ³ÉäÀà£¨¼´½«±»É¾³ı£©
-- resultMap£ºÓÃÀ´ÃèÊö´ÓÊı¾İ¿â½á¹û¼¯ÖĞÀ´¼ÓÔØ¶ÔÏó£¬ËüÊÇ×î¸´ÔÓ¡¢×îÇ¿´óµÄÔªËØ
-//- cache£º¸ø¶¨ÃüÃû¿Õ¼äµÄ»º´æÅäÖÃ
-//- cache-ref £ºÆäËûÃüÃû¿Õ¼ä»º´æÅäÖÃµÄÒıÓÃ
+- select ï¼šæŸ¥è¯¢è¯­å¥
+- insert ï¼šæ’å…¥è¯­å¥
+- update ï¼šæ›´æ–°è¯­å¥
+- delete ï¼šåˆ é™¤è¯­å¥
+- sqlï¼šå…è®¸å®šä¹‰ä¸€éƒ¨åˆ†sqlï¼Œç„¶ååœ¨å„ä¸ªåœ°æ–¹å¼•ç”¨å®ƒ  
+- parameterMapï¼šå®šä¹‰å‚æ•°æ˜ å°„ç±»ï¼ˆå³å°†è¢«åˆ é™¤ï¼‰
+- resultMapï¼šç”¨æ¥æè¿°ä»æ•°æ®åº“ç»“æœé›†ä¸­æ¥åŠ è½½å¯¹è±¡ï¼Œå®ƒæ˜¯æœ€å¤æ‚ã€æœ€å¼ºå¤§çš„å…ƒç´ 
+//- cacheï¼šç»™å®šå‘½åç©ºé—´çš„ç¼“å­˜é…ç½®
+//- cache-ref ï¼šå…¶ä»–å‘½åç©ºé—´ç¼“å­˜é…ç½®çš„å¼•ç”¨
 =================================================
 --------------------------------select--------------------------------
 <select id="selectPerson" parameterType="int" resultType="hashmap">  	SELECT * FROM PERSON WHERE ID = #{id} 
@@ -30,42 +30,52 @@ update Author set    username = #{username},  password = #{password},    email =
 	delete from Author where id = #{id}
 </delete>
 ----------------------------------------------------------------------
---------------------------²ÎÊı´¦Àí-----------------------------------
+--------------------------å‚æ•°å¤„ç†-----------------------------------
 
-´«µİ¶à¸ö²ÎÊı£¨<5£©£º#{parm1}  #{parm2}.........
-	       ÃüÃû²ÎÊı£ºÃ÷È·Ö¸¶¨·â×°ÊÇmapµÄKey 
-		        public ·½·¨(int id,string name)=>public ·½·¨(@param("id")int id,@param("name")string name)--¿ÉÒÔÊ¹ÓÃ-->#{id}#{name}
+ä¼ é€’å¤šä¸ªå‚æ•°ï¼ˆ<5ï¼‰ï¼š#{parm1}  #{parm2}.........
+	       å‘½åå‚æ•°ï¼šæ˜ç¡®æŒ‡å®šå°è£…æ˜¯mapçš„Key 
+		        public æ–¹æ³•(int id,string name)=>public æ–¹æ³•(@param("id")int id,@param("name")string name)--å¯ä»¥ä½¿ç”¨-->#{id}#{name}
 ----------------------------------------------------------------------
-´«µİ¶à¸ö²ÎÊı£¨>5£©£º#{parm1}  #{parm2}.........
-    ·µ»ØList£º
-        ½Ó¿Ú¶¨ÒåÎª£ºpublic List<Role> findRolesByBean(RoleParams roleParam);
-    ¼ÇÂ¼·â×°map£ºpublic Map<ÊôĞÔ,ÊôĞÔ,......>  ·½·¨();
-	            -·µ»ØÒ»Ìõ¼ÇÂ¼map-----resultType="map"£¨MyBatisÆğµÄ±ğÃû£©
-                            -¶àÌõ¼ÇÂ¼·â×°ÔÚÒ»¸ömap-----resultType="¼¯ºÏÀïÔªËØµÄÃû×Ö"
+ä¼ é€’å¤šä¸ªå‚æ•°ï¼ˆ>5ï¼‰ï¼š#{parm1}  #{parm2}.........
+    è¿”å›Listï¼š
+        æ¥å£å®šä¹‰ä¸ºï¼špublic List<Role> findRolesByBean(RoleParams roleParam);
+    è®°å½•å°è£…mapï¼špublic Map<å±æ€§,å±æ€§,......>  æ–¹æ³•();
+	            -è¿”å›ä¸€æ¡è®°å½•map-----resultType="map"ï¼ˆMyBatisèµ·çš„åˆ«åï¼‰
+                            -å¤šæ¡è®°å½•å°è£…åœ¨ä¸€ä¸ªmap-----resultType="é›†åˆé‡Œå…ƒç´ çš„åå­—"
 ----------------------------------------------------------------------
-´«µİµ¥¸ö²ÎÊı£º${}£ºÊÇÒÔÔ¤±àÒëµÄĞÎÊ½£¬½«²ÎÊıÉèÖÃµ½sqlÓï¾äÖĞ£¬paeparedStatement£º·ÀÖ¹sql×¢Èë¡£
-	       #{}£ºÈ¡³öµÄÖµÖ±½ÓÆ¿×°ÔÚsqlÓï¾äÖĞ£¬ÓĞ°²È«ÎÊÌâ¡£
+ä¼ é€’å•ä¸ªå‚æ•°ï¼š${}ï¼šæ˜¯ä»¥é¢„ç¼–è¯‘çš„å½¢å¼ï¼Œå°†å‚æ•°è®¾ç½®åˆ°sqlè¯­å¥ä¸­ï¼ŒpaeparedStatementï¼šé˜²æ­¢sqlæ³¨å…¥ã€‚
+	       #{}ï¼šå–å‡ºçš„å€¼ç›´æ¥ç“¶è£…åœ¨sqlè¯­å¥ä¸­ï¼Œæœ‰å®‰å…¨é—®é¢˜ã€‚
 =============================================
-sql £º
-¸ÃÔªËØ¿ÉÓÃÓÚ¶¨Òå¿ÉÒÔ°üº¬ÔÚÆäËûÓï¾äÖĞµÄ¿ÉÖØÓÃSQL´úÂëÆ¬¶Î¡£Ëü¿ÉÒÔ¾²Ì¬µØ£¨ÔÚ¼ÓÔØ½×¶ÎÆÚ¼ä£©²ÎÊı»¯¡£ ²»Í¬µÄÊôĞÔÖµ¿ÉÒÔÔÚ°üº¬ÊµÀıÖĞ±ä»¯¡£
+sql ï¼š
+è¯¥å…ƒç´ å¯ç”¨äºå®šä¹‰å¯ä»¥åŒ…å«åœ¨å…¶ä»–è¯­å¥ä¸­çš„å¯é‡ç”¨SQLä»£ç ç‰‡æ®µã€‚å®ƒå¯ä»¥é™æ€åœ°ï¼ˆåœ¨åŠ è½½é˜¶æ®µæœŸé—´ï¼‰å‚æ•°åŒ–ã€‚ ä¸åŒçš„å±æ€§å€¼å¯ä»¥åœ¨åŒ…å«å®ä¾‹ä¸­å˜åŒ–ã€‚
+1.å°†ç»å¸¸è¦æŸ¥è¯¢çš„åˆ—åï¼Œæˆ–è€…æ’å…¥ç”¨åˆ—åæŠ½å–å‡ºæ¥æ–¹ä¾¿å¼•ç”¨
+2.includeæ¥å¼•ç”¨
+3.includeè¿˜å¯ä»¥å®šä¹‰ä¸€äº›property,sqlæ ‡ç­¾å†…éƒ¨å°±ä½¿ç”¨è‡ªå®šä¹‰å±æ€§
+å–å€¼çš„æ­£ç¡®æ–¹å¼${prop},
+ä¸èƒ½ä½¿ç”¨#{.}
+
+
 <sql id="userColumns">
 	${alias}.id,${alias}.username,${alias}.password
 </sql>
 
-SQLÆ¬¶ÎÒ²¿ÉÒÔ°üº¬ÔÚÁíÒ»¸öÓï¾äÖĞ
+SQLç‰‡æ®µä¹Ÿå¯ä»¥åŒ…å«åœ¨å¦ä¸€ä¸ªè¯­å¥ä¸­
 <select id="selectUsers" resultType="map">
     select
         <include refid="userColumns"><property name="alias" value="t1"/>,               <include refid="userColumns"><property name="alias" value="t2"/>         from some_table t1
         cross join some_table t2
 </select>
+è°ƒç”¨æ—¶<include refid="sqlç‰‡æ®µid"></include>
+
+
 =============================================
-resultMap£º
+resultMapï¼š
 		-the most important and powerful element in MyBatis.-
 
 <resultMap id="userResultMap" type="User">
-    <id property="id" column="user_id" /><!- Ö÷¼ü -->
-    <result property="username" column="user_name"/><!- ÆäËûÁĞ -->
-    <result property="password" column="hashed_password"/><!- ÆäËûÁĞ  -->
+    <id property="id" column="user_id" /><!- ä¸»é”® -->
+    <result property="username" column="user_name"/><!- å…¶ä»–åˆ— -->
+    <result property="password" column="hashed_password"/><!- å…¶ä»–åˆ—  -->
 </resultMap>
 
 
@@ -73,4 +83,4 @@ resultMap£º
     select user_id,user_name,hashed_password  from some_table  where id=#{id}
 </select>
 
-resultTypeºÍresultMapÖ»ÄÜÌîÒ»¸ö
+resultTypeå’ŒresultMapåªèƒ½å¡«ä¸€ä¸ª
