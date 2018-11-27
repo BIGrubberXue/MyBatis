@@ -2,7 +2,7 @@ Dynamic sql
 ---------------------------------------------------------------------------------
 if --
 <select id="findActiveBlogWithTitleLike"     resultType="Blog">
-    SELECT * FROM BLOG  WHERE state = °ÆACTIVE°Ø
+    SELECT * FROM BLOG  WHERE state = ‚ÄòACTIVE‚Äô
     <if test="title != null">
         AND title like #{title}
     </if>
@@ -14,7 +14,7 @@ if --
 choose,when,otherwise
 
 <select id="findActiveBlogLike"     resultType="Blog">
-    SELECT * FROM BLOG WHERE state = °ÆACTIVE°Ø
+    SELECT * FROM BLOG WHERE state = ‚ÄòACTIVE‚Äô
     <choose>
         <when test="title != null">
             AND title like #{title}
@@ -31,11 +31,11 @@ choose,when,otherwise
 ---------------------------------------------------------------------------------
 trim,where
 <!-   <trim prefix="SET" suffixOverrides=",">  ... </trim>
-	…˙≥…◊÷∑˚¥Æ–ﬁ∏ƒ
-        prefix="∏¯∆¥¥Æ«∞µƒ◊÷∑˚¥Æº”“ª∏ˆ«∞∂À"
-        prefixOverrides="«∞∂À∏≤∏«£¨»•µÙ’˚∏ˆ◊÷∑˚¥Æ∂‡”‡µƒ◊÷∑˚"
-        suffix="∏¯∆¥¥Æ«∞µƒ◊÷∑˚¥Æº”“ª∏ˆ∫Û∂À"
-        suffixOverrides="∫Û∂À∏≤∏«£¨»•µÙ’˚∏ˆ◊÷∑˚¥Æ∂‡”‡µƒ◊÷∑˚"
+	ÁîüÊàêÂ≠óÁ¨¶‰∏≤‰øÆÊîπ
+        prefix="ÁªôÊãº‰∏≤ÂâçÁöÑÂ≠óÁ¨¶‰∏≤Âä†‰∏Ä‰∏™ÂâçÁ´Ø"
+        prefixOverrides="ÂâçÁ´ØË¶ÜÁõñÔºåÂéªÊéâÊï¥‰∏™Â≠óÁ¨¶‰∏≤Â§ö‰ΩôÁöÑÂ≠óÁ¨¶"
+        suffix="ÁªôÊãº‰∏≤ÂâçÁöÑÂ≠óÁ¨¶‰∏≤Âä†‰∏Ä‰∏™ÂêéÁ´Ø"
+        suffixOverrides="ÂêéÁ´ØË¶ÜÁõñÔºåÂéªÊéâÊï¥‰∏™Â≠óÁ¨¶‰∏≤Â§ö‰ΩôÁöÑÂ≠óÁ¨¶"
  -->
 <select id="findActiveBlogLike"     resultType="Blog">
     SELECT * FROM BLOG  WHERE 
@@ -58,7 +58,7 @@ set
     <set>      
         <if test="username != null">username=#{username},</if>
         <if test="password != null">password=#{password},</if>      
-        <if test="email != null">email=#{email},</if>     °¢
+        <if test="email != null">email=#{email},</if>     „ÄÅ
         <if test="bio != null">bio=#{bio}</if>    
     </set>
     where id=#{id} 
@@ -70,9 +70,9 @@ set
 ---------------------------------------------------------------------------------
 forech
 
-<!-  open:…˙≥…◊÷∑˚¥Æø™ º∑˚∫≈ 
-       separator:…˙≥…◊÷∑˚¥Æµƒº‰∏Ù∑˚
-       close:…˙≥…◊÷∑˚¥ÆΩ· ¯∑˚∫≈
+<!-  open:ÁîüÊàêÂ≠óÁ¨¶‰∏≤ÂºÄÂßãÁ¨¶Âè∑ 
+       separator:ÁîüÊàêÂ≠óÁ¨¶‰∏≤ÁöÑÈó¥ÈöîÁ¨¶
+       close:ÁîüÊàêÂ≠óÁ¨¶‰∏≤ÁªìÊùüÁ¨¶Âè∑
   -->
 <select id="selectPostIn" resultType="domain.blog.Post">
     SELECT *  FROM POST P  WHERE ID in  
@@ -81,3 +81,9 @@ forech
     </foreach>
 </select>
 
+---------------------------------------------------------------------------------
+<bind></bind>  Ê®°Á≥äÊü•ËØ¢
+<select id="selectBlogsLike" resultType="Blog"> 
+    <bind name="pattern" value="'%' + _parameter.getTitle() + '%'" />
+    SELECT * FROM BLOG  WHERE title LIKE #{pattern}
+</select>
